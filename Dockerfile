@@ -15,6 +15,7 @@ COPY package-lock.json .
 RUN npm ci
 # copy tests
 COPY cypress cypress
+COPY cypress.json .
 # copy what to test
 COPY public public
 RUN ls -la
