@@ -32,3 +32,7 @@ FROM busybox as PROD
 COPY --from=TEST /app/public /public
 # nothing to do - Zeit should take care of serving static content
 # we would only need a command if we want to use this image locally
+
+# show the size of the current folder so we know
+RUN ls -la
+RUN du -sh
