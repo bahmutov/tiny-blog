@@ -8,6 +8,10 @@
 #   - run "npm ci"
 #   - copy spec files
 # this way Cypress and node_modules are cached as long as package files stay same
+# Docker build looks at the file checksums during each "COPY ..." command
+# and if the copied files were the same, the image layer is cached and not recomputed
+# https://docs.docker.com/v17.09/engine/userguide/eng-image/dockerfile_best-practices/#build-cache
+# every other command like "RUN npm ci" is cached by default unless the command itself has been changed
 FROM cypress/base:10 as TEST
 WORKDIR /app
 COPY package.json .
