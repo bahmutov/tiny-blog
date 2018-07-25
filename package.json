@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "serve"
+    "test": "start-test 5000 cy:run",
+    "start": "serve",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "dev": "start-test 5000 cy:open"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   "homepage": "https://github.com/bahmutov/tiny-blog#readme",
   "devDependencies": {
     "cypress": "3.0.2",
-    "serve": "9.3.0"
+    "serve": "9.3.0",
+    "start-server-and-test": "1.5.0"
   }
 }
