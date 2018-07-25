@@ -19,9 +19,8 @@ COPY cypress cypress
 # copy what to test
 COPY public public
 RUN ls -la
-# run e2e tests
-# RUN npm test
-RUN echo "running tests... (fake)"
+# run e2e Cypress tests
+RUN npm test
 
 # production image - without Cypress and node modules!
 FROM busybox as PROD
