@@ -12,9 +12,9 @@ FROM cypress/base:10 as TEST
 WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
+COPY now.json .
 RUN npm ci
 # copy tests
-COPY cypress.json .
 COPY cypress cypress
 # copy what to test
 COPY public public
@@ -27,5 +27,6 @@ RUN npm test
 # production image - without Cypress and node modules!
 FROM busybox as PROD
 COPY --from=TEST /app/public /public
+COPY --from=TEST /app/now.json /now.json
 # nothing to do - Zeit should take care of serving static content
 # we would only need a command if we want to use this image locally
