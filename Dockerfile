@@ -12,7 +12,7 @@ FROM cypress/base:10 as TEST
 WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
-COPY now.json .
+COPY now.json /app/now.json
 RUN npm ci
 # copy tests
 COPY cypress cypress
