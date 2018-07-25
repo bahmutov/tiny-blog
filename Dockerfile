@@ -2,13 +2,22 @@
 # discarded before serving in production
 # https://glebbahmutov.com/blog/making-small-docker-image/
 
-# for testing - copy everything
+# testing image - we really want to cache AS MUCH AS POSSIBLE
+# so we build like this
+#   - copy package files
+#   - run "npm ci"
+#   - copy spec files
+# this way Cypress and node_modules are cached as long as package files stay same
 FROM cypress/base:10 as TEST
 WORKDIR /app
-COPY . .
-
-# install dependencies, needed for testing
+COPY package.json .
+COPY package-lock.json .
 # RUN npm ci
+# copy tests
+COPY cypress.json .
+COPY cypress cypress
+# copy what to test
+COPY public public
 RUN ls -la
 # run e2e tests
 # RUN npm test
