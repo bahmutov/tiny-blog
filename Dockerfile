@@ -18,6 +18,7 @@ COPY cypress.json .
 COPY cypress cypress
 # copy what to test
 COPY public public
+COPY now.json .
 RUN ls -la
 RUN ls -la public
 # run e2e Cypress tests
