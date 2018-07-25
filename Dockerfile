@@ -19,6 +19,7 @@ COPY cypress cypress
 # copy what to test
 COPY public public
 RUN ls -la
+RUN ls -la public
 # run e2e Cypress tests
 RUN npm test
 
