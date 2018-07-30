@@ -15,8 +15,10 @@
 FROM cypress/base:10 as TEST
 WORKDIR /app
 COPY package.json .
-COPY package-lock.json .
-RUN npm ci
+# TEMP remove package lock to install custom Cypress NPM module
+# COPY package-lock.json .
+# RUN npm ci
+RUN npm install
 # copy tests
 COPY cypress cypress
 COPY cypress.json .
