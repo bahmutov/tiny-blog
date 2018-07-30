@@ -18,6 +18,7 @@ COPY package.json .
 # TEMP remove package lock to install custom Cypress NPM module
 # COPY package-lock.json .
 # RUN npm ci
+ENV CYPRESS_INSTALL_BINARY=https://cdn.cypress.io/beta/binary/3.0.3/linux64/circle-render-without-terminal-in-cli-1243-970b9c75822e22c802f913221281d33e97bd7673-30290/cypress.zip
 RUN npm install
 # copy tests
 COPY cypress cypress
