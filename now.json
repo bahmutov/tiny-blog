@@ -1,3 +1,6 @@
 {
-  "type": "static"
+  "type": "static",
+  "env": {
+    "CYPRESS_INSTALL_BINARY": "https://cdn.cypress.io/beta/binary/3.0.3/linux64/circle-render-without-terminal-in-cli-1243-970b9c75822e22c802f913221281d33e97bd7673-30290/cypress.zip"
+  }
 }
