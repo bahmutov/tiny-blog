@@ -14,9 +14,19 @@
 # every other command like "RUN npm ci" is cached by default unless the command itself has been changed
 FROM cypress/base:10 as TEST
 WORKDIR /app
+
+# dependencies will be installed only if the package files change
 COPY package.json .
 COPY package-lock.json .
+
+# by setting CI environment variable we switch the Cypress install messages
+# to small "started / finished" and avoid 1000s of lines of progress messages
+# https://github.com/cypress-io/cypress/issues/1243
+ENV CI=1
 RUN npm ci
+
+# tests will rerun if the "cypress" folder, "cypress.json" file or "public" folder
+# has any changes
 # copy tests
 COPY cypress cypress
 COPY cypress.json .
@@ -24,7 +34,20 @@ COPY cypress.json .
 COPY public public
 RUN ls -la
 RUN ls -la public
-# run e2e Cypress tests
+
+#
+# ALWAYS run e2e Cypress tests
+#
+
+# to avoid Docker thinking it is the same command and skipping tests
+# have a dummy command here
+# see discussion in https://github.com/moby/moby/issues/1996
+# find variable that changes. For example on Zeit.co Now GitHub deploys the HOSTNAME changes
+# RUN env
+ARG HOSTNAME=1
+# if you run "docker build . --build-arg HOSTNAME=foo"
+# it will bust this cache and it will rerun all commands from here
+
 RUN npm test
 
 # production image - without Cypress and node modules!
