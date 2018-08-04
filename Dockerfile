@@ -15,15 +15,15 @@
 FROM cypress/base:10 as TEST
 WORKDIR /app
 
-# by setting CI environment variable we switch the Cypress install messages
-# to small "started / finished" and avoid 1000s of lines of progress messages
-# https://github.com/cypress-io/cypress/issues/1243
-ENV CI=1
-
 # dependencies will be installed only if the package files change
 COPY package.json .
 COPY package-lock.json .
-RUN npm ci
+
+# by setting CI environment variable we switch the Cypress install messages
+# to small "started / finished" and avoid 1000s of lines of progress messages
+# https://github.com/cypress-io/cypress/issues/1243
+# ENV CI=1
+RUN CI=1 npm ci
 
 # tests will rerun if the "cypress" folder, "cypress.json" file or "public" folder
 # has any changes
