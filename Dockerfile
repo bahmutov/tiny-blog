@@ -42,11 +42,12 @@ RUN ls -la public
 # to avoid Docker thinking it is the same command and skipping tests
 # have a dummy command here
 # see discussion in https://github.com/moby/moby/issues/1996
-RUN echo "environment variables that start with NOW prefix"
-RUN npx print-env NOW
-RUN env
-# save output to a file to bust cache
-RUN npx print-env NOW > envs
+# find variable that changes. For example on Zeit.co Now GitHub deploys the HOSTNAME changes
+# RUN env
+ARG HOSTNAME=1
+# if you run "docker build . --build-arg HOSTNAME=foo"
+# it will bust this cache and it will rerun all commands from here
+
 RUN npm test
 
 # production image - without Cypress and node modules!

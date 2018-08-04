@@ -66,6 +66,20 @@ Uploading static files (16.0K)
 exit code: 0
 ```
 
+## Cache busting
+
+Locally, rerunning `docker build .` will NOT run all commands, since every command stays the same, and Docker does not rerun commands unless the contents changes. So it _always_ rerun `npm test` command you have to *bust cache*. I have defined a build argument `HOSTNAME` and you can pass new value to guarantee that `npm test` runs.
+
+```text
+docker build . --build-arg HOSTNAME=foo
+```
+
+I suggest using timestamp as the argument value
+
+```text
+docker build . --build-arg HOSTNAME=$(date +%s)
+```
+
 ## Related information
 
 - [Making Small Docker Image](https://glebbahmutov.com/blog/making-small-docker-image/)
