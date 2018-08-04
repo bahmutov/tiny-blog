@@ -1,4 +1,4 @@
-# tiny-blog
+# tiny-blog [![renovate-app badge][renovate-badge]][renovate-app]
 
 > Shows how to use multi-stage Docker build with Cypress tests
 
@@ -83,3 +83,6 @@ docker build . --build-arg HOSTNAME=$(date +%s)
 ## Related information
 
 - [Making Small Docker Image](https://glebbahmutov.com/blog/making-small-docker-image/)
+
+[renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
+[renovate-app]: https://renovateapp.com/
