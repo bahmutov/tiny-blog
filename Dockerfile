@@ -44,6 +44,7 @@ RUN ls -la public
 # see discussion in https://github.com/moby/moby/issues/1996
 RUN echo "environment variables that start with NOW prefix"
 RUN npx print-env NOW
+RUN env
 # save output to a file to bust cache
 RUN npx print-env NOW > envs
 RUN npm test
