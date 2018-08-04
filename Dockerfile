@@ -22,8 +22,8 @@ COPY package-lock.json .
 # by setting CI environment variable we switch the Cypress install messages
 # to small "started / finished" and avoid 1000s of lines of progress messages
 # https://github.com/cypress-io/cypress/issues/1243
-# ENV CI=1
-RUN CI=1 npm ci
+ENV CI=1
+RUN npm ci
 
 # tests will rerun if the "cypress" folder, "cypress.json" file or "public" folder
 # has any changes
@@ -34,7 +34,18 @@ COPY cypress.json .
 COPY public public
 RUN ls -la
 RUN ls -la public
-# run e2e Cypress tests
+
+#
+# ALWAYS run e2e Cypress tests
+#
+
+# to avoid Docker thinking it is the same command and skipping tests
+# have a dummy command here
+# see discussion in https://github.com/moby/moby/issues/1996
+RUN echo "environment variables that start with NOW prefix"
+RUN npx print-env NOW
+# save output to a file to bust cache
+RUN npx print-env NOW > envs
 RUN npm test
 
 # production image - without Cypress and node modules!
