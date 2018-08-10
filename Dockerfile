@@ -46,6 +46,11 @@ RUN ls -la public
 # ALWAYS run e2e Cypress tests
 #
 
+# We have set this environment variable during build step using "now.json" file
+# but we have to tell Docker to use it
+# see https://zeit.co/docs/features/build-env-and-secrets
+ARG CYPRESS_RECORD_KEY
+
 # to avoid Docker thinking it is the same command and skipping tests
 # have a dummy command here
 # see discussion in https://github.com/moby/moby/issues/1996
