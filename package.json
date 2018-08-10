@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "start-test 5000 cy:run",
+    "test:ci": "start-test 5000 cy:run:record",
     "start": "serve public",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "cy:run:record": "cypress run --record",
     "dev": "start-test 5000 cy:open"
   },
   "repository": {

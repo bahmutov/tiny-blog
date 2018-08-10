@@ -56,7 +56,7 @@ ARG HOSTNAME=1
 # it will bust this cache and it will rerun all commands from here
 # a good practice is to use the current timestamp in seconds
 #   docker build . --build-arg HOSTNAME=$(date +%s)
-RUN npm test
+RUN npm run test:ci
 
 #
 # Production image - without Cypress and node modules!
