@@ -2,7 +2,10 @@
 # discarded before serving in production
 # https://glebbahmutov.com/blog/making-small-docker-image/
 
-# testing image - we really want to cache AS MUCH AS POSSIBLE
+#
+# Testing image
+#
+# we really want to cache AS MUCH AS POSSIBLE
 # so we build like this
 #   - copy package files
 #   - run "npm ci"
@@ -24,6 +27,10 @@ COPY package-lock.json .
 # https://github.com/cypress-io/cypress/issues/1243
 ENV CI=1
 RUN npm ci
+# verify that Cypress has been installed correctly.
+# running this command separately from "cypress run" will also cache its result
+# to avoid verifying again when running the tests
+RUN npx cypress verify
 
 # tests will rerun if the "cypress" folder, "cypress.json" file or "public" folder
 # has any changes
@@ -47,10 +54,13 @@ RUN ls -la public
 ARG HOSTNAME=1
 # if you run "docker build . --build-arg HOSTNAME=foo"
 # it will bust this cache and it will rerun all commands from here
-
+# a good practice is to use the current timestamp in seconds
+#   docker build . --build-arg HOSTNAME=$(date +%s)
 RUN npm test
 
-# production image - without Cypress and node modules!
+#
+# Production image - without Cypress and node modules!
+#
 FROM busybox as PROD
 COPY --from=TEST /app/public /public
 # nothing to do - Zeit should take care of serving static content
