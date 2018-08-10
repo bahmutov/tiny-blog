@@ -1,3 +1,8 @@
 {
-  "type": "static"
+  "type": "static",
+  "build": {
+    "env": {
+      "CYPRESS_RECORD_KEY": "@tiny-blog-cypress-record-key"
+    }
+  }
 }

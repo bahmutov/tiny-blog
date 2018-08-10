@@ -46,6 +46,11 @@ RUN ls -la public
 # ALWAYS run e2e Cypress tests
 #
 
+# We have set this environment variable during build step using "now.json" file
+# but we have to tell Docker to use it
+# see https://zeit.co/docs/features/build-env-and-secrets
+ARG CYPRESS_RECORD_KEY
+
 # to avoid Docker thinking it is the same command and skipping tests
 # have a dummy command here
 # see discussion in https://github.com/moby/moby/issues/1996
@@ -56,7 +61,7 @@ ARG HOSTNAME=1
 # it will bust this cache and it will rerun all commands from here
 # a good practice is to use the current timestamp in seconds
 #   docker build . --build-arg HOSTNAME=$(date +%s)
-RUN npm test
+RUN npm run test:ci
 
 #
 # Production image - without Cypress and node modules!
