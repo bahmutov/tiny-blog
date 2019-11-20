@@ -26,7 +26,7 @@
   "devDependencies": {
     "cypress": "3.6.1",
     "serve": "10.1.2",
-    "start-server-and-test": "1.7.13"
+    "start-server-and-test": "1.10.6"
   },
   "dependencies": {
     "@bahmutov/print-env": "1.1.0"
