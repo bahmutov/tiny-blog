@@ -5,8 +5,8 @@ describe('tiny blog', () => {
     cy.contains('h1', 'Tiny Blog')
   })
 
-  it('loads 2nd time', () => {
+  it('fails on purpose', () => {
     cy.visit('localhost:5000')
-    cy.contains('h1', 'Tiny Blog')
+    cy.contains('h1', 'Some other text')
   })
 })
