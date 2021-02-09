@@ -29,6 +29,6 @@
     "start-server-and-test": "1.11.6"
   },
   "dependencies": {
-    "@bahmutov/print-env": "1.1.0"
+    "@bahmutov/print-env": "1.3.0"
   }
 }
